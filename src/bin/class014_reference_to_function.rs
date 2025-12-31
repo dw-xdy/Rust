@@ -20,7 +20,6 @@
 //     print_country(country);
 // }
 
-
 // // but this way much better.
 // fn print_country(country_name: &String) {
 //     println!("{}", country_name);
@@ -32,7 +31,6 @@
 //     print_country(&country); // That was fun, let's do it again!
 // }
 
-
 // this example just like owner change adds_hungary function.
 // so don't think it's a &String it's not!
 // we need know about these are different!.
@@ -41,7 +39,8 @@ fn main() {
     adds_hungary(country);
 }
 
-fn adds_hungary(mut country: String) { // Here's how: adds_hungary takes the String and declares it mutable!
+fn adds_hungary(mut country: String) {
+    // Here's how: adds_hungary takes the String and declares it mutable!
     country.push_str("-Hungary");
     println!("{}", country);
 }
