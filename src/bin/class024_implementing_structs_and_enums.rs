@@ -105,5 +105,3 @@ fn main() {
     let my_mood = Mood::Sleepy;
     my_mood.check();
 }
-
-
