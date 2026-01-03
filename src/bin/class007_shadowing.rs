@@ -21,5 +21,5 @@ fn main() {
         let x = x + y; // shadow with new x: 28
         x // return x: final_number is now the value of x
     };
-    println!("The number is now: {}", final_number)
+    println!("The number is now: {final_number}")
 }
