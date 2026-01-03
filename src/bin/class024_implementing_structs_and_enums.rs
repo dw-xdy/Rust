@@ -95,7 +95,9 @@ impl Mood {
     fn check(&self) {
         match self {
             Mood::Good => println!("Feeling good!"),
-            Mood::Bad => println!("Eh, not feeling so good"),
+            Mood::Bad => {
+                println!("Eh, not feeling so good")
+            }
             Mood::Sleepy => println!("Need sleep NOW"),
         }
     }
