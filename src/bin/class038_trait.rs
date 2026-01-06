@@ -371,10 +371,9 @@ use std::fmt::Display;
 //     print_it("hello world")
 // }
 
-
 fn print_it<T>(input: T)
 where
-    T: Display + AsRef<str>
+    T: Display + AsRef<str>,
 {
     println!("{input}")
 }
