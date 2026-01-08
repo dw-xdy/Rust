@@ -14,7 +14,6 @@
 //     dbg!(double_vec);
 // }
 
-
 fn main() {
     let new_vec = vec![8, 9, 10];
 
@@ -22,7 +21,8 @@ fn main() {
         .iter()
         .inspect(|first_item| {
             println!("The item is: {first_item}");
-            match **first_item % 2 { // first item is a &&i32 so we use **
+            match **first_item % 2 {
+                // first item is a &&i32 so we use **
                 0 => println!("It is even."),
                 _ => println!("It is odd."),
             }
@@ -31,4 +31,3 @@ fn main() {
         .map(|x| x * 2)
         .collect::<Vec<i32>>();
 }
-
