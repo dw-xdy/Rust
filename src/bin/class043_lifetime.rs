@@ -171,9 +171,6 @@
 //
 // // 关于 const 和 static 修饰的参数是不是可以引用的问题, 实际上他们的生命周期是: 'static.
 
-use std::net::AddrParseError;
-use std::panic::PanicHookInfo;
-use std::path::Component::ParentDir;
 
 // fn main() {}
 
@@ -348,12 +345,41 @@ use std::path::Component::ParentDir;
 //     }
 // }
 
-// 关于这个结构体的生命周期也是一样的.
-// 我们甚至可以进一步保证 b 的生命周期 不少于 a, 但是这个我们基本上用不到, 只要我们知道就行了.
-struct City<'a, 'b: 'a> {
-    name: String,
-    country: &'a Vec<String>,
-    all: &'b str,
+// // 关于这个结构体的生命周期也是一样的.
+// // 我们甚至可以进一步保证 b 的生命周期 不少于 a, 但是这个我们基本上用不到, 只要我们知道就行了.
+// struct City<'a, 'b: 'a> {
+//     name: String,
+//     country: &'a Vec<String>,
+//     all: &'b str,
+// }
+//
+// fn main() {}
+
+struct Adventurer<'a> {
+    name: &'a str,
+    hit_points: u32,
 }
 
-fn main() {}
+impl Adventurer<'_> {
+    fn take_damage(&mut self) {
+        self.hit_points -= 20;
+        println!("{} has {} hit points left!", self.name, self.hit_points);
+    }
+}
+
+impl std::fmt::Display for Adventurer<'_> {
+
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{} has {} hit points.", self.name, self.hit_points)
+    }
+}
+
+fn main() {
+    let mut billy = Adventurer {
+        name: "Billy",
+        hit_points: 100_000,
+    };
+    println!("{}", billy);
+    billy.take_damage();
+}
+
