@@ -73,10 +73,8 @@ fn main() {
     // if we use this: std::mem::drop(param), that drop memory.
     std::mem::drop(reference);
 
-    
     dbg!(&user_1);
     // active: RefCell {
     //     value: false,
     // }
-
 }
