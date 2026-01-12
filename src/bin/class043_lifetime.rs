@@ -171,7 +171,6 @@
 //
 // // 关于 const 和 static 修饰的参数是不是可以引用的问题, 实际上他们的生命周期是: 'static.
 
-
 // fn main() {}
 
 // 这里我们并不需要显式的写出 param2 的生命周期, 因为 param2 永远不会被返回.
@@ -368,7 +367,6 @@ impl Adventurer<'_> {
 }
 
 impl std::fmt::Display for Adventurer<'_> {
-
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{} has {} hit points.", self.name, self.hit_points)
     }
@@ -382,4 +380,3 @@ fn main() {
     println!("{}", billy);
     billy.take_damage();
 }
-
