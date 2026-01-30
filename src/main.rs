@@ -1,27 +1,28 @@
 use std::fs::File;
-use std::io::{self, Read, Write, BufReader, BufWriter};
+use std::io::{self, BufReader, BufWriter, Read, Write};
 use std::path::Path;
 
 fn main() {
     println!("====================================================");
-    println!("           欢迎使用文件「隐身」工具 (v1.5)           ");
+    println!("           欢迎使用文件「隐身」工具 (v1.6)           ");
     println!("      本工具可以对任何文件(小说、图片、视频)加密      ");
-    println!("      注意：加密和解密使用的是同一个功能和钥匙        ");
+    println!("          注意：加密和解密使用的是钥匙(密钥)        ");
     println!("====================================================");
 
     loop {
         println!("\n--- 功能菜单 ---");
-        println!(" [1] 开始 加密 或 解密 (只需运行一次)");
-        println!(" [2] 退出程序");
+        println!(" [1] 开始 加密 (只需运行一次)");
+        println!(" [2] 开始 解密 (只需运行一次)");
+        println!(" [3] 退出程序");
 
-        let choice = get_input("\n请选择功能并按回车 (1 或 2): ");
+        let choice = get_input("\n请选择功能并按回车 (1 或 2 或 3): ");
 
-        if choice == "2" {
+        if choice == "3" {
             println!("程序已安全退出。");
             break;
         }
-        if choice != "1" {
-            println!("⚠️ 输入有误，请输入数字 1 或 2 喔！");
+        if choice != "1" && choice != "2" {
+            println!("⚠️ 输入有误，请输入数字 1 或 2 或 3 喔！");
             continue;
         }
 
@@ -86,7 +87,9 @@ fn process_file_with_progress(input: &str, output: &str, key: &str) -> io::Resul
     let mut last_percent = 999;
 
     while let Ok(n) = reader.read(&mut buffer) {
-        if n == 0 { break; }
+        if n == 0 {
+            break;
+        }
 
         for i in 0..n {
             buffer[i] ^= key_bytes[(processed_size as usize + i) % key_bytes.len()];
@@ -112,8 +115,11 @@ fn draw_progress_bar(percent: usize) {
     let mut bar = String::from("进度：[");
 
     for i in 0..bar_len {
-        if i < filled_len { bar.push('█'); }
-        else { bar.push('░'); }
+        if i < filled_len {
+            bar.push('█');
+        } else {
+            bar.push('░');
+        }
     }
     bar.push_str(&format!("] {}%", percent));
 
