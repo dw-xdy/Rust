@@ -4,10 +4,14 @@ use std::path::Path;
 
 fn main() {
     println!("====================================================");
-    println!("           欢迎使用文件「隐身」工具 (v1.6)           ");
+    println!("          欢迎使用文件「隐身」工具 (v1.6)           ");
     println!("      本工具可以对任何文件(小说、图片、视频)加密      ");
-    println!("          注意：加密和解密使用的是钥匙(密钥)        ");
+    println!("       注意：加密和解密使用的是同一个密钥(钥匙)        ");
     println!("====================================================");
+
+    println!();
+    println!("   提示：如果文件变成乱码或打不开，说明加密成功了！");
+    println!("  再用同样的密钥(钥匙) 运行一次解密，它就会变回原样。");
 
     loop {
         println!("\n--- 功能菜单 ---");
@@ -38,7 +42,7 @@ fn main() {
 
         // 2. 获取输出路径
         println!("\n第二步：处理后的文件叫什么名字？");
-        println!("(例如：如果原文件叫 test.mp4，你可以输入 test_加密.mp4)");
+        println!("(例如：如果原文件叫 123.txt，你可以输入 123_加密.txt)");
         let output_path = get_input("请输入新的文件名: ").replace('\"', "");
 
         // 3. 获取钥匙
@@ -55,12 +59,12 @@ fn main() {
         match process_file_with_progress(&input_path, &output_path, &key) {
             Ok(_) => {
                 println!("\n✨ 操作成功！✨");
-                println!("你的新文件已存放在: {}", output_path);
+                println!("你的新文件已存放在: {output_path}");
                 println!("提示：如果文件变成乱码或打不开，说明加密成功了！");
                 println!("      再用同样的钥匙运行一次，它就会变回原样。");
             }
             Err(e) => {
-                println!("\n❌ 发生意外错误: {}", e);
+                println!("\n❌ 发生意外错误: {e}");
                 println!("可能是文件正在被其他程序占用，请关闭后再试。");
             }
         }
@@ -121,14 +125,14 @@ fn draw_progress_bar(percent: usize) {
             bar.push('░');
         }
     }
-    bar.push_str(&format!("] {}%", percent));
+    bar.push_str(&format!("] {percent}%"));
 
-    print!("\r{}", bar);
+    print!("\r{bar}");
     io::stdout().flush().unwrap();
 }
 
 fn get_input(prompt: &str) -> String {
-    print!("{}", prompt);
+    print!("{prompt}");
     io::stdout().flush().unwrap();
     let mut input = String::new();
     io::stdin().read_line(&mut input).unwrap();
