@@ -152,6 +152,7 @@
 //     println!("What about DeadStar? It's the number {}.", DeadStar as u32);
 // }
 
+// 元组类型，enum 就是所有东西取其一。strcut enum就是所有东西都要。
 enum Number {
     U32(u32),
     I32(i32),
