@@ -92,4 +92,22 @@ fn main() {
     my_vec3.push(3);
     my_vec3.push(3);
     println!("{:#?}", my_vec3.capacity());
+
+    // 关于这段代码，没办法通过编译行为，
+    // 因为对Vec 使用了push方法，那么从我们原来的代码中知道，该 vec 的内存地址可能发生改变，
+    // 所以对应的，我们应该先增加，再借用数据。(调整一下顺序)
+    // let mut v = vec![1, 2, 3, 4, 5];
+    //
+    // let first = &v[0];
+    //
+    // v.push(6);
+    //
+    // println!("The first element is: {first}");
+
+    let mut v = vec![1, 2, 3, 4, 5];
+
+    v.push(6);
+    let first = &v[0];
+
+    println!("The first element is: {first}");
 }
