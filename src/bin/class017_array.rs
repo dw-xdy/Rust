@@ -9,6 +9,7 @@
 //     }
 //     println!("{:?}", my_array);
 // }
+
 fn main() {
     let array_of_ten = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
@@ -19,7 +20,7 @@ fn main() {
     let everything = &array_of_ten[..];
 
     println!(
-        "Three to five: {:?},\n start at two: {:?},\n end at five: {:?},\n everything: {:?}",
+        "Three to five: {:#?},\n start at two: {:#?},\n end at five: {:#?},\n everything: {:#?}",
         three_to_five, start_at_two, end_at_five, everything
     );
 }

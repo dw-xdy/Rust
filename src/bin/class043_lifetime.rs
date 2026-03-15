@@ -1,6 +1,7 @@
 // fn returns_reference() -> &str {
 //     // because this &my_string is belong to my_string,
 //     // so &my_string can't life more my_string.
+//     // 又因为在最后 {} 结束之后，会导致销毁my_string，所以不能返回。
 //     let my_string = String::from("I am a string");
 //     &my_string // ⚠️
 // }
@@ -17,6 +18,7 @@
 //     println!("{}", my_str);
 // }
 
+// 这里是因为有一个'static 的原因: 这是永远存在的。
 // fn returns_str() -> &'static str {
 //     let my_string = String::from("I am a string");
 //     "I am a str"
@@ -27,6 +29,8 @@
 //     println!("{}", my_str);
 // }
 //
+
+// 这段代码可以运行没有问题
 // #[derive(Debug)]
 // struct City {
 //     name: &'static str, // ⚠️
@@ -40,9 +44,10 @@
 //     };
 //
 //     println!("{:?}", my_city);
+//     println!("{:?}", my_city.name);
+//     println!("{:?}", my_city.date_founded);
 // }
 
-//
 // #[derive(Debug)]
 // struct City {
 //     name: &'static str, // must live for the whole program
